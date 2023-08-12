@@ -1,5 +1,8 @@
+
+# Workflow name
 name: Decrypt Confidential File and Load into Pandas
 
+# Trigger this workflow on pushes to the 'main' branch
 on:
   push:
     branches:
@@ -7,27 +10,45 @@ on:
 
 jobs:
   decrypt-and-process:
+    # This job will run on the latest version of Ubuntu
     runs-on: ubuntu-latest
+    
     steps:
-
+      # Step 1: Checkout the repository code so that we can access its contents
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Decrypt the confidential file
+      # The passphrase for decryption is stored securely as a GitHub secret
       - name: Decrypt confidential.json.gpg
         env:
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
         run: |
+          # The '--quiet' and '--batch' options ensure that gpg runs without any interactive prompts
+          # The decrypted file is stored in the home directory as 'decrypted_file.json'
           gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/decrypted_file.json confidential.json.gpg
 
+      # Step 3: Set up the desired Python version
+      # You can change the version as needed
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8" # You can specify another version if needed
+          python-version: "3.8"
 
+      # Step 4: Install necessary Python packages
       - name: Install dependencies
         run: |
+          # Upgrade pip to the latest version
           python -m pip install --upgrade pip
+          # Install pandas library for data processing
           pip install pandas
 
+      # Step 5: Execute the Python script to process the decrypted file
       - name: Run print_secret.py
         run: python print_secret.py
+
+      # Optionally, if the decrypted file is sensitive, and you don't want it to linger around,
+      # you can add a step to remove the decrypted file after processing.
+
+      - name: Remove decrypted file
+        run: rm $HOME/decrypted_file.json
