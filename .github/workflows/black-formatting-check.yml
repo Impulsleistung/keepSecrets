@@ -18,7 +18,6 @@ jobs:
     - name: Black formatting
       uses: datadog/action-py-black-formatter@v2.1
       id: action_black
-
     - name: Suggest code formatting changes
       uses: reviewdog/action-suggester@v1
       with:
