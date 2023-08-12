@@ -1,17 +1,11 @@
-name: Format Python Code
-on:
-  push:
-    branches:
-      - main
+name: black-action
+on: [push, pull_request]
 jobs:
-  format:
+  linter_name:
+    name: runner / black formatter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: psf/black@v2.16.0
+      - uses: datadog/action-py-black-formatter@v2.1
         with:
-          args: "--line-length=88"
-      - name: Push changes
-        uses: actions/push@v2
-        with:
-          force: true
+          check_mode: "true"
