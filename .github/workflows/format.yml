@@ -1,0 +1,17 @@
+name: Format Python Code
+on:
+  push:
+    branches:
+      - main
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: psf/black@v2.16.0
+        with:
+          args: "--line-length=88"
+      - name: Push changes
+        uses: actions/push@v2
+        with:
+          force: true
