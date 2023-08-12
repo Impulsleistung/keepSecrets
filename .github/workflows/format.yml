@@ -1,6 +1,10 @@
 name: format
 on: [push, pull_request]
-jobs:
+
+permissions:
+  contents: write
+
+  jobs:
   linter_name:
     name: runner / black
     runs-on: ubuntu-latest
@@ -19,7 +23,6 @@ jobs:
 
       - name: Set up Git
         run: |
-          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/Impulsleistung/keepSecrets.git
           git config --local user.email "git@impulsleistung.de"
           git config --local user.name "GitHub Action"
 
