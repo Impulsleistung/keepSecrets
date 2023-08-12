@@ -1,0 +1,31 @@
+name: Reformat YML Files
+on: [push, pull_request]
+jobs:
+  reformat-sql:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the source code so there are some files to look at.
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      # Run the reformat action
+      - name: Reformat YAML Files
+        uses: credfeto/action-yaml-format@v1.3.2
+        # This comment explains what the action does.
+        # The action will reformat all YAML files in the repository.
+      # Set up Git
+      - run: |
+          git config --local user.email "${{ env.GITHUB_ACTOR }}@users.noreply.github.com"
+          git config --local user.name "${{ env.GITHUB_REPOSITORY }} Actions"
+        # This comment explains what the following command does.
+        # The command sets the user email and name for Git.
+      # Commit and push if there are changes
+      - run: |
+        if [ -z "$(git status --short)" ]; then
+          echo "No changes to commit"
+        else
+          git commit -m "Automated commit by GitHub Action"
+          git push
+        fi
+        # This comment explains what the following command does.
+        # The command commits and pushes the changes to the repository if there are any.

@@ -1,0 +1,43 @@
+name: black-formatting-check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  linter_name:
+    name: runner / black
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Black formatting
+      uses: datadog/action-py-black-formatter@v2.1
+      id: action_black
+
+    - name: Suggest code formatting changes
+      uses: reviewdog/action-suggester@v1
+      with:
+        tool_name: blackfmt
+
+        # Comment: Set up Git so that the commit is made by the GitHub Actions user.
+      - name: Set up Git
+        run: |
+          git config --local user.email "${{ env.GITHUB_ACTOR }}@users.noreply.github.com"
+          git config --local user.name "${{ env.GITHUB_REPOSITORY }} Actions"
+
+        # Comment: Commit and push if there are changes.
+      - name: Commit and push changes
+        run: |
+          if [ -z "$(git status --short)" ]; then
+            echo "No changes to commit"
+          else
+            git commit -m "Automated commit by GitHub Action"
+            git push
+          fi
+
+# Comment: This workflow checks the formatting of Python code using Black.
