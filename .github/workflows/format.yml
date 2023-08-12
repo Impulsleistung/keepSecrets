@@ -1,4 +1,4 @@
-name: format
+name: black-formatting-check
 on:
 - push
 - pull_request
@@ -10,20 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Check files using the black formatter
-      uses: datadog/action-py-black-formatter@v2.1
+    - uses: datadog/action-py-black-formatter@v2.1
       id: action_black
-    - name: Annotate diff changes using reviewdog
-      if: steps.action_black.outputs.is_formatted == 'true'
-      uses: reviewdog/action-suggester@v1
+    - uses: reviewdog/action-suggester@v1
       with:
         tool_name: blackfmt
     - name: Set up Git
-      run: 'git config --local user.email "git@impulsleistung.de"
+      run: |
+        git config --local user.email "git@impulsleistung.de"
         git config --local user.name "GitHub Action"
-        '
     - name: Commit and push if there are changes
-      run: 'git add -A
-        git diff --cached --quiet || git commit -m "Automated commit by GitHub Action"
-        git push
-        '
+      run: |
+        git add -A
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Automated commit by GitHub Action"
+          git push
+        fi
