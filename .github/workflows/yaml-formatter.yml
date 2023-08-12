@@ -24,14 +24,6 @@ jobs:
           git config --local user.name "${{ env.GITHUB_REPOSITORY }} Actions"
         # This comment explains what the following command does.
         # The command sets the user email and name for Git.
-
-      # Commit and push if there are changes
-      - run: |
-          if [ -z "$(git status --short)" ]; then
-            echo "No changes to commit"
-          else
-            git commit -m "Automated commit by GitHub Action"
-            git push
-          fi
-        # This comment explains what the following command does.
-        # The command commits and pushes the changes to the repository if there are any.
+          git add -A
+          git commit -m "Automated commit by GitHub Action"
+          git push
