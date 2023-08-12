@@ -1,8 +1,10 @@
 import pandas as pd
+import os
 
-# Load the decrypted file into a pandas dataframe
-df = pd.read_json('$HOME/decrypted_file.json')
+# Set the display options
+pd.set_option('display.max_rows', 10)
+pd.set_option('display.max_columns', 10)
 
-# Print the dataframe with nice formatting
-with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'display.width', 1000):
-    print(df)
+file_path = os.path.join(os.environ['HOME'], 'decrypted_file.json')
+df = pd.read_json(file_path)
+
