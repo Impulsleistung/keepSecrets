@@ -1,0 +1,25 @@
+# Let's test the yml formatter with 
+# name: my application
+# version:1.0
+# metadata:
+# author:John Doe
+# email: johndoe@email.com
+# dependencies: [dep1, dep2,dep3]
+
+name: my application
+version:1.0
+metadata:
+author:John Doe
+email: johndoe@email.com
+dependencies: [dep1, dep2,dep3]
+
+# It should become
+# name: my application
+# version: 1.0
+# metadata:
+#   author: John Doe
+#   email: johndoe@email.com
+# dependencies:
+#   - dep1
+#   - dep2
+#   - dep3
