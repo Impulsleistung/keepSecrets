@@ -19,6 +19,7 @@ jobs:
 
       - name: Set up Git
         run: |
+          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/Impulsleistung/keepSecrets.git
           git config --local user.email "git@impulsleistung.de"
           git config --local user.name "GitHub Action"
 
