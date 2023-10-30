@@ -14,5 +14,3 @@ def display_json_content(file_path):
 # Test the function
 displayed_content = display_json_content(file_path)
 print(displayed_content)
-
-
