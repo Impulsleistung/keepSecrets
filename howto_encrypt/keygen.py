@@ -9,4 +9,4 @@ random_string = ''.join(random.choice(characters) for i in range(100))
 with open('pass.txt', 'w') as file:
     file.write(random_string)
 
-# End of file
+# End of this file
