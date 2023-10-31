@@ -6,6 +6,10 @@ This guide demonstrates a method for managing sensitive data within a public rep
 
 ![Alt text](drawing/gpg_workflow.svg)
 
+## Structure of repository
+
+![Alt text](drawing/project_structure.svg)
+
 ### Encryption Process
 
 In this step, you will encrypt a file named `confidential.json` using the AES256 encryption algorithm. The passphrase required for encryption is stored in a file named `pass.txt`.
