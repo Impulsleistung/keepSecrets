@@ -54,3 +54,7 @@ In a GitHub environment, you can decrypt the file using an environment variable 
 # confidential.json.gpg: the encrypted file to be decrypted
 gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/decrypted_file.json confidential.json.gpg
 ```
+
+## Protection of branches by CodeQL
+
+![Alt text](drawing/branch_protection.svg)
