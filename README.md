@@ -2,7 +2,9 @@
 
 This guide demonstrates a method for managing sensitive data within a public repository, leveraging GPG (GNU Privacy Guard) and GitHub. Utilizing GPG for encryption and decryption is a straightforward and secure approach.
 
-## Local Machine Setup
+## Encrypt offline and decrypt in GitHub-Actions
+
+![Alt text](drawing/gpg_workflow.svg)
 
 ### Encryption Process
 
