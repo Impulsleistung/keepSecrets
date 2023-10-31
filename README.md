@@ -58,3 +58,5 @@ gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/de
 ## Protection of branches by CodeQL
 
 ![Alt text](drawing/branch_protection.svg)
+
+🚀 Coded with love on GitHub for public use 🌏, in collaboration with the awesome [CARIAD SE](https://cariad.technology/)
