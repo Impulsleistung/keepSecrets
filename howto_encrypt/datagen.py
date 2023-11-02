@@ -18,3 +18,5 @@ with open('howto_encrypt\confidential.json', 'w') as file:
     for index, row in df.iterrows():
         json_row = json.dumps(row.to_dict())
         file.write(json_row + '\n')
+
+# End of file
